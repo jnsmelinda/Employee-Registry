@@ -10,7 +10,6 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
 
-
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
 
@@ -41,16 +40,16 @@ function generalQuestions() {
     ]);
 }
 
-function getRoleQuestion(role) {
+async function getRoleQuestion(role) {
     switch (role) {
     case "Manager":
-        managerQuestion();
+        await managerQuestion();
         break;
     case "Engineer":
-        engineerQuestion();
+        await engineerQuestion();
         break;
     case "Intern":
-        internQuestion();
+        await internQuestion();
         break;
     }
 }
@@ -82,9 +81,34 @@ function internQuestion() {
         }])
 }
 
+function newEmployee() {
+    return inquirer.prompt([
+        {
+            type: "confirm",
+            name: "choice",
+            message: "Would like to add a new Emlpoyee?"
+        }])
+}
+
+function quit() {
+    console.log("\nGoodbye!");
+    process.exit(0);
+}
+
+function promptNewOrQuit(val) {
+    if (val.choice) {
+        getEmployeeInfo();
+    } else {
+        quit();
+    }
+}
+
 async function getEmployeeInfo() {
+    let employeeData;
     const employeeInfo = await generalQuestions();
-    getRoleQuestion(employeeInfo.role);
+    await getRoleQuestion(employeeInfo.role);
+    const newOrQuit = await newEmployee();
+    await promptNewOrQuit(newOrQuit);
 }
 
 getEmployeeInfo();
