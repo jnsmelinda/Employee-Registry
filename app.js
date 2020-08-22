@@ -14,6 +14,86 @@ const render = require("./lib/htmlRenderer");
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
 
+
+function generalQuestions() {
+    return inquirer.prompt([
+        {
+            type: "input",
+            name: "name",
+            message: "Name:"
+        },
+        {
+            type: "input",
+            name: "id",
+            message: "ID:"
+        },
+        {
+            type: "input",
+            name: "email",
+            message: "Email:"
+        },
+        {
+            type: "list",
+            name: "role",
+            message: "Employee type:",
+            choices: ["Manager", "Engineer", "Intern"]
+        },
+    ]);
+}
+
+function getRoleQuestion(role) {
+    switch (role) {
+    case "Manager":
+        managerQuestion();
+        break;
+    case "Engineer":
+        engineerQuestion();
+        break;
+    case "Intern":
+        internQuestion();
+        break;
+    }
+}
+
+function managerQuestion() {
+    return inquirer.prompt ([
+        {
+            type: "input",
+            name: "office",
+            message: "OfficeNumber:"
+        }])
+}
+
+function engineerQuestion() {
+    return inquirer.prompt ([
+        {
+            type: "input",
+            name: "github",
+            message: "GitHub:"
+        }])
+}
+
+function internQuestion() {
+    return inquirer.prompt ([
+        {
+            type: "input",
+            name: "school",
+            message: "School:"
+        }])
+}
+
+async function getEmployeeInfo() {
+    const employeeInfo = await generalQuestions();
+    getRoleQuestion(employeeInfo.role);
+}
+
+getEmployeeInfo();
+
+
+
+
+
+
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
 // generate and return a block of HTML including templated divs for each employee!
