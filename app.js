@@ -10,11 +10,12 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
 
+let employees = [];
+
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
 
-
-function generalQuestions() {
+function getEmployeeInfo() {
     return inquirer.prompt([
         {
             type: "input",
@@ -36,25 +37,11 @@ function generalQuestions() {
             name: "role",
             message: "Employee type:",
             choices: ["Manager", "Engineer", "Intern"]
-        },
+        }
     ]);
 }
 
-async function getRoleQuestion(role) {
-    switch (role) {
-    case "Manager":
-        await managerQuestion();
-        break;
-    case "Engineer":
-        await engineerQuestion();
-        break;
-    case "Intern":
-        await internQuestion();
-        break;
-    }
-}
-
-function managerQuestion() {
+function getManagerInfo() {
     return inquirer.prompt ([
         {
             type: "input",
@@ -63,7 +50,7 @@ function managerQuestion() {
         }])
 }
 
-function engineerQuestion() {
+function getEngineerInfo() {
     return inquirer.prompt ([
         {
             type: "input",
@@ -72,7 +59,7 @@ function engineerQuestion() {
         }])
 }
 
-function internQuestion() {
+function getInternInfo() {
     return inquirer.prompt ([
         {
             type: "input",
@@ -81,39 +68,56 @@ function internQuestion() {
         }])
 }
 
-function newEmployee() {
-    return inquirer.prompt([
+function quit() {
+    console.log("\nGoodbye!");
+    // process.exit(0);
+}
+
+async function promptNewOrQuit() {
+    const answer = await inquirer.prompt([
         {
             type: "confirm",
             name: "choice",
             message: "Would like to add a new Emlpoyee?"
-        }])
-}
+        }
+    ])
 
-function quit() {
-    console.log("\nGoodbye!");
-    process.exit(0);
-}
-
-function promptNewOrQuit(val) {
-    if (val.choice) {
-        getEmployeeInfo();
-    } else {
+    if (answer.choice) {
+        await addEmployees();
+    }
+    else {
         quit();
     }
 }
 
-async function getEmployeeInfo() {
-    let employeeData;
-    const employeeInfo = await generalQuestions();
-    await getRoleQuestion(employeeInfo.role);
-    const newOrQuit = await newEmployee();
-    await promptNewOrQuit(newOrQuit);
+async function createEmployeeFromUserInput() {
+    const employeeInfo = await getEmployeeInfo();
+    switch (employeeInfo.role) {
+        case "Manager":
+            const managerInfo = await getManagerInfo();
+            return new Manager(employeeInfo.name, employeeInfo.id, employeeInfo.email, managerInfo.office);
+        case "Engineer":
+            const engineerInfo = await getEngineerInfo();
+            return new Engineer(employeeInfo.name, employeeInfo.id, employeeInfo.email, engineerInfo.github);
+        case "Intern":
+            const internInfo = await getInternInfo();
+            return new Intern(employeeInfo.name, employeeInfo.id, employeeInfo.email, internInfo.school);
+    }
 }
 
-getEmployeeInfo();
+async function addEmployees() {
+    const employee = await createEmployeeFromUserInput();
+    employees.push(employee);
+    await promptNewOrQuit();
+}
 
+async function run() {
+    await addEmployees();
+    console.log(employees);
+    console.log(render(employees));
+}
 
+run();
 
 
 
