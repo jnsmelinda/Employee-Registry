@@ -9,6 +9,7 @@ const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
+const { workers } = require("cluster");
 
 let employees = [];
 
@@ -111,10 +112,29 @@ async function addEmployees() {
     await promptNewOrQuit();
 }
 
+function writeToFile(data) {
+    fs.writeFile(
+        outputPath,
+        data,
+        (err) => {
+            if (err) throw err;
+            console.log(`File has been saved!`);
+        }
+    );
+}
+
+
 async function run() {
-    await addEmployees();
-    console.log(employees);
-    console.log(render(employees));
+    try {
+        await addEmployees();
+        console.log(employees);
+        const html = render(employees);
+        console.log(html);
+        writeToFile(html);
+    }
+    catch(err) {
+        console.log(err);
+    }
 }
 
 run();
