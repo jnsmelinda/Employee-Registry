@@ -1,0 +1,61 @@
+body {
+    font-family: BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+h1 {
+    color: rgb(190, 100, 142);
+    font-weight: 400;
+}
+
+h2 {
+    color: rgb(143, 44, 90);
+    font-family: BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight: lighter;
+}
+
+h3 {
+    color: rgb(143, 44, 90);
+    font-family: BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight: lighter;
+    font-size: 1.25rem;
+}
+
+.fa-mug-hot, .fa-user-graduate, .fa-glasses {
+    color: rgb(80, 79, 79);
+}
+
+a {
+    color: rgb(143, 44, 90);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: none;
+    color: rgb(143, 44, 90);
+    opacity: 0.7;
+}
+
+.card {
+    margin: 10px;
+    size: 300px;
+    border: none;
+}
+
+.card-header {
+    border: 1px solid rgba(0,0,0,.125);
+}
+
+.card-body {
+    padding: 0px;
+}
+
+.list-group-item {
+    padding: 10px;
+    margin-bottom: 0;
+}
+
+@media (max-width: 575.98px) {
+    .row {
+        width: 100%;
+    }
+}
