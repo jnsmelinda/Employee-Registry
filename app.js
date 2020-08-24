@@ -4,12 +4,14 @@ const Intern = require("./lib/Intern");
 const inquirer = require("inquirer");
 const path = require("path");
 const fs = require("fs");
+const validator = require("validator");
 
 const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
 const { workers } = require("cluster");
+const { isError } = require("util");
 
 let employees = [];
 
@@ -21,17 +23,20 @@ function getEmployeeInfo() {
         {
             type: "input",
             name: "name",
-            message: "Name:"
+            message: "Name:",
+            validate: validateName
         },
         {
             type: "input",
             name: "id",
-            message: "ID:"
+            message: "ID:",
+            validate: validateId
         },
         {
             type: "input",
             name: "email",
-            message: "Email:"
+            message: "Email:",
+            validate: validateEmail
         },
         {
             type: "list",
@@ -42,13 +47,45 @@ function getEmployeeInfo() {
     ]);
 }
 
+function validateName(name) {
+    if (!validator.isLength(name, {min: 2, max: 20}) || validator.isInt(name)) {
+        return "Name must be between 2 and 20 characters";
+    }
+
+    return true;
+}
+
+function validateId(id) {
+    if (!validator.isInt(id, {gt: 10000, lt: 99999})) {
+        return "The ID must be a number of 5 digits";
+    }
+
+    return true;
+}
+
+function validateEmail(email) {
+    if (!validator.isEmail(email)) {
+        return "Not valid email format";
+    }
+    return true;
+}
+
 function getManagerInfo() {
     return inquirer.prompt ([
         {
             type: "input",
             name: "office",
-            message: "OfficeNumber:"
+            message: "OfficeNumber:",
+            validate: validateOfficeNumber
         }])
+}
+
+function validateOfficeNumber(office) {
+    if (!validator.isInt(office, {gt: 1, lt: 9999})) {
+        return "The ID must be a number between 1 and 9999";
+    }
+
+    return true;
 }
 
 function getEngineerInfo() {
@@ -56,8 +93,17 @@ function getEngineerInfo() {
         {
             type: "input",
             name: "github",
-            message: "GitHub:"
+            message: "GitHub:",
+            validate: validateGithub
         }])
+}
+
+function validateGithub(github) {
+    if (validator.isEmpty(github)) {
+        return "GitHub cannot be empty."
+    }
+
+    return true;
 }
 
 function getInternInfo() {
@@ -65,8 +111,17 @@ function getInternInfo() {
         {
             type: "input",
             name: "school",
-            message: "School:"
+            message: "School:",
+            validate: validateSchool
         }])
+}
+
+function validateSchool(school) {
+    if (validator.isEmpty(school)) {
+        return "School cannot be empty."
+    }
+
+    return true;
 }
 
 function quit() {
