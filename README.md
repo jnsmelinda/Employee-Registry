@@ -26,7 +26,7 @@ The user needs to open the command-line, type `node index.js`, and enter input f
 ## Demo
 You can [watch the demo video](https://www.youtube.com/watch?v=nw7_on4DQ5Y) or you can [download it](https://github.com/jnsmelinda/Employee-Registry/blob/master/demo/demo-video.webm).
 
-![demo-image](/demo/demo.png)
+![demo-image](/demo.png)
 
 ## Steps of developement
 - adding project skeleton files
