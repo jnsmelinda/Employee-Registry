@@ -11,7 +11,7 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
 
-let employees = [];
+const employees = [];
 
 function getEmployeeInfo() {
     return inquirer.prompt([
@@ -67,14 +67,14 @@ function validateEmail(email) {
 }
 
 function getManagerInfo() {
-    return inquirer.prompt ([
+    return inquirer.prompt([
         {
             type: "input",
             name: "office",
             message: "OfficeNumber:",
             validate: validateOfficeNumber
         }
-    ])
+    ]);
 }
 
 function validateOfficeNumber(office) {
@@ -86,38 +86,38 @@ function validateOfficeNumber(office) {
 }
 
 function getEngineerInfo() {
-    return inquirer.prompt ([
+    return inquirer.prompt([
         {
             type: "input",
             name: "github",
             message: "GitHub:",
             validate: validateGithub
         }
-    ])
+    ]);
 }
 
 function validateGithub(github) {
     if (validator.isEmpty(github)) {
-        return "GitHub cannot be empty."
+        return "GitHub cannot be empty.";
     }
 
     return true;
 }
 
 function getInternInfo() {
-    return inquirer.prompt ([
+    return inquirer.prompt([
         {
             type: "input",
             name: "school",
             message: "School:",
             validate: validateSchool
         }
-    ])
+    ]);
 }
 
 function validateSchool(school) {
     if (validator.isEmpty(school)) {
-        return "School cannot be empty."
+        return "School cannot be empty.";
     }
 
     return true;
@@ -134,12 +134,11 @@ async function promptNewOrQuit() {
             name: "choice",
             message: "Would like to add a new Emlpoyee?"
         }
-    ])
+    ]);
 
     if (answer.choice) {
         await addEmployees();
-    }
-    else {
+    } else {
         quit();
     }
 }
@@ -147,15 +146,15 @@ async function promptNewOrQuit() {
 async function createEmployeeFromUserInput() {
     const employeeInfo = await getEmployeeInfo();
     switch (employeeInfo.role) {
-        case "Manager":
-            const managerInfo = await getManagerInfo();
-            return new Manager(employeeInfo.name, employeeInfo.id, employeeInfo.email, managerInfo.office);
-        case "Engineer":
-            const engineerInfo = await getEngineerInfo();
-            return new Engineer(employeeInfo.name, employeeInfo.id, employeeInfo.email, engineerInfo.github);
-        case "Intern":
-            const internInfo = await getInternInfo();
-            return new Intern(employeeInfo.name, employeeInfo.id, employeeInfo.email, internInfo.school);
+    case "Manager":
+        const managerInfo = await getManagerInfo();
+        return new Manager(employeeInfo.name, employeeInfo.id, employeeInfo.email, managerInfo.office);
+    case "Engineer":
+        const engineerInfo = await getEngineerInfo();
+        return new Engineer(employeeInfo.name, employeeInfo.id, employeeInfo.email, engineerInfo.github);
+    case "Intern":
+        const internInfo = await getInternInfo();
+        return new Intern(employeeInfo.name, employeeInfo.id, employeeInfo.email, internInfo.school);
     }
 }
 
@@ -163,9 +162,8 @@ async function addEmployees() {
     const employee = await createEmployeeFromUserInput();
     if (isValidRole(employee)) {
         employees.push(employee);
-    }
-    else {
-        console.log("Employee is not valid, you have already registered an employee with role \"Manager\". Invalide employees wont't be registered.");
+    } else {
+        console.log("Employee is not valid, you have already registered a \"Manager\". Invalid employees wont't be registered.");
     }
 
     await promptNewOrQuit();
@@ -177,7 +175,7 @@ function isValidRole(employee) {
 }
 
 function containsManager() {
-    return employees.find(employee => employee.getRole() === "Manager") != undefined;
+    return employees.find((employee) => employee.getRole() === "Manager") != undefined;
 }
 
 function writeToFile(data) {
@@ -186,7 +184,7 @@ function writeToFile(data) {
         data,
         (err) => {
             if (err) throw err;
-            console.log(`File has been saved!`);
+            console.log("File has been saved!");
         }
     );
 }
@@ -196,8 +194,7 @@ async function run() {
         await addEmployees();
         const html = render(employees);
         writeToFile(html);
-    }
-    catch(err) {
+    } catch (err) {
         console.log(err);
     }
 }

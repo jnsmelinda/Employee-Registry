@@ -1,0 +1,34 @@
+{
+    "env": {
+        "commonjs": true,
+        "es2020": true,
+        "node": true
+    },
+    "extends": [
+        "google"
+    ],
+    "parserOptions": {
+        "ecmaVersion": 11
+    },
+    "ignorePatterns": ["lib/htmlRenderer.js", "test"],
+    "rules": {
+        "linebreak-style": [
+            "error",
+            "windows"
+        ],
+        "quotes": [
+            "error",
+            "double"
+        ],
+        "indent": [
+            "error",
+            4
+        ],
+        "max-len": [
+            "error",
+            140
+        ],
+        "comma-dangle": "off",
+        "require-jsdoc": "off"
+    }
+}
