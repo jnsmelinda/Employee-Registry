@@ -62,6 +62,7 @@ function validateEmail(email) {
     if (!validator.isEmail(email)) {
         return "Not valid email format";
     }
+
     return true;
 }
 
@@ -72,7 +73,8 @@ function getManagerInfo() {
             name: "office",
             message: "OfficeNumber:",
             validate: validateOfficeNumber
-        }])
+        }
+    ])
 }
 
 function validateOfficeNumber(office) {
@@ -90,7 +92,8 @@ function getEngineerInfo() {
             name: "github",
             message: "GitHub:",
             validate: validateGithub
-        }])
+        }
+    ])
 }
 
 function validateGithub(github) {
@@ -108,7 +111,8 @@ function getInternInfo() {
             name: "school",
             message: "School:",
             validate: validateSchool
-        }])
+        }
+    ])
 }
 
 function validateSchool(school) {
