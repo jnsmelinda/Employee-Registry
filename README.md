@@ -38,6 +38,7 @@ You can [watch the demo video](https://www.youtube.com/watch?v=nw7_on4DQ5Y).
 - fixing responsive issues
 - adding validation to input fields
 - refactor/clean-up
+- adding eslint and fixing linting issues
 - readme
 - recording the use of application
 
