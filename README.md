@@ -26,6 +26,8 @@ The user needs to open the command-line, type `node index.js`, and enter input f
 ## Demo
 You can [watch the demo video](https://www.youtube.com/watch?v=S7RCAE3FxAM) or you can [download it](https://github.com/jnsmelinda/Readme-generator/raw/master/Readme-generator-demo.webm).
 
+![demo-image](/demo/demo.png)
+
 ## Steps of developement
 - adding project skeleton files
 - creating supporti files: .editorconfig, .gitignore, package.json
@@ -35,7 +37,6 @@ You can [watch the demo video](https://www.youtube.com/watch?v=S7RCAE3FxAM) or y
 - adding signature color theme
 - fixing responsive issues
 - adding validation to input fields
-- adding eslint and fixing linting issues
 - refactor/clean-up
 - readme
 - recording the use of application
