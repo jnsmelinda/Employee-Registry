@@ -21,7 +21,7 @@ This is a software engineering employee registry command line application. The a
 At first, you need to have [node.js](https://nodejs.org/) installed, then you need to install the required modules by running `npm install` in the command-line.
 
 ## Usage
-The user needs to open the command-line, type `node index.js`, and enter input for each Employee field: name, id, email, role. Additional questions based on the entered role are github, office number or school.
+The user needs to open the command-line, type `node app.js`, and enter input for each Employee field: name, id, email, role. Additional questions based on the entered role are github, office number or school.
 
 ## Demo
 You can [watch the demo video](https://www.youtube.com/watch?v=nw7_on4DQ5Y).
