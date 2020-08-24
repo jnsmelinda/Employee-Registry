@@ -17,7 +17,7 @@ h3 {
     color: rgb(143, 44, 90);
     font-family: BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     font-weight: lighter;
-    font-size: 1.25rem;
+    /* font-size: 1.25rem; */
 }
 
 .fa-mug-hot, .fa-user-graduate, .fa-glasses {
@@ -37,7 +37,7 @@ a:hover {
 
 .card {
     margin: 10px;
-    size: 300px;
+    /* size: 300px; */
     border: none;
 }
 
@@ -54,8 +54,8 @@ a:hover {
     margin-bottom: 0;
 }
 
-@media (max-width: 575.98px) {
+/* @media (max-width: 575.98px) {
     .row {
         width: 100%;
     }
-}
+} */
