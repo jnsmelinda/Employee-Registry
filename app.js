@@ -10,13 +10,8 @@ const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
-const { workers } = require("cluster");
-const { isError } = require("util");
 
 let employees = [];
-
-// Write code to use inquirer to gather information about the development team members,
-// and to create objects for each team member (using the correct classes as blueprints!)
 
 function getEmployeeInfo() {
     return inquirer.prompt([
