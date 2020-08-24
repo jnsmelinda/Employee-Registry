@@ -158,8 +158,23 @@ async function createEmployeeFromUserInput() {
 
 async function addEmployees() {
     const employee = await createEmployeeFromUserInput();
-    employees.push(employee);
+    if (isValidRole(employee)) {
+        employees.push(employee);
+    }
+    else {
+        console.log("Employee is not valid, you have already registered an employee with role \"Manager\". Invalide employees wont't be registered.");
+    }
+
     await promptNewOrQuit();
+}
+
+// Unfortunately the inquirer library does not support list validation: https://github.com/SBoudrias/Inquirer.js/issues/593
+function isValidRole(employee) {
+    return !(employee.getRole() === "Manager" && containsManager());
+}
+
+function containsManager() {
+    return employees.find(employee => employee.getRole() === "Manager") != undefined;
 }
 
 function writeToFile(data) {
@@ -173,13 +188,10 @@ function writeToFile(data) {
     );
 }
 
-
 async function run() {
     try {
         await addEmployees();
-        console.log(employees);
         const html = render(employees);
-        console.log(html);
         writeToFile(html);
     }
     catch(err) {
