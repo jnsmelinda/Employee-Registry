@@ -24,7 +24,7 @@ At first, you need to have [node.js](https://nodejs.org/) installed, then you ne
 The user needs to open the command-line, type `node index.js`, and enter input for each Employee field: name, id, email, role. Additional questions based on the entered role are github, office number or school.
 
 ## Demo
-You can [watch the demo video](https://www.youtube.com/watch?v=S7RCAE3FxAM) or you can [download it](https://github.com/jnsmelinda/Readme-generator/raw/master/Readme-generator-demo.webm).
+You can [watch the demo video](https://www.youtube.com/watch?v=nw7_on4DQ5Y) or you can [download it](https://github.com/jnsmelinda/Readme-generator/raw/master/Readme-generator-demo.webm).
 
 ![demo-image](/demo/demo.png)
 
